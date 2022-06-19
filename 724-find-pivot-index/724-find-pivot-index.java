@@ -1,17 +1,21 @@
 class Solution {
     public int pivotIndex(int[] nums) {
-            for (int i = 0; i < nums.length; i++) {
-            int leftSum;
-            int rightSum;
+                    for (int i = 0; i < nums.length; i++) {
+            int leftSum=0;
+            int rightSum = 0;
             if (i == 0) {
                 leftSum = 0;
             }else{
-                leftSum= getSum(Arrays.copyOfRange(nums,0,i));
+                for (int j = 0; j < i; j++) {
+                    leftSum = leftSum+nums[j];
+                }
             }
             if(i== nums.length-1){
                 rightSum=0;
             }else{
-                rightSum = getSum(Arrays.copyOfRange(nums, i + 1, nums.length));
+                for (int j = i+1; j < nums.length; j++) {
+                    rightSum=rightSum+nums[j];
+                }
             }
             if(leftSum==rightSum){
                 return i;
@@ -19,13 +23,5 @@ class Solution {
         }
         return -1;
 
-    }
-    
-    public int getSum(int[] array) {
-        int sum = 0;
-        for (int n : array) {
-            sum = sum + n;
-        }
-        return sum;
     }
 }

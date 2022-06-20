@@ -1,6 +1,5 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-                     List<List<String>> groups = new ArrayList<>();
         HashMap<String,List<String>> strings = new HashMap<>();
         for (String s:strs) {
             char[] c = s.toCharArray();
@@ -14,10 +13,8 @@ class Solution {
                 strings.put(wordSorted,newGroup);
             }
         }
-        for (String key:strings.keySet()) {
-            groups.add(strings.get(key));
-        }
-        return groups;
+        
+        return new ArrayList<>(strings.values());
 
     }
 }

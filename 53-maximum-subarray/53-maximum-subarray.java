@@ -1,14 +1,32 @@
 class Solution {
     public int maxSubArray(int[] nums) {
-        int sum = Integer.MIN_VALUE;
-        int curr = 0;
-        for(int i =0;i<nums.length;i++){
-            if(curr<0){
-                curr=0;
-            }
-            curr+=nums[i];
-            sum = Math.max(sum,curr);
+        return helper(0,nums.length-1,nums);
+    }
+    
+    public int helper(int i,int j, int[] nums)
+    { 
+        if(i==j) return nums[i];       
+        int left_cross=Integer.MIN_VALUE, right_cross=Integer.MIN_VALUE;
+        
+        int mid= (i+j)/2;
+        int cur=0;
+        for(int k=mid+1;k<=j;k++)
+        {
+            cur+= nums[k];
+            right_cross= Math.max(right_cross,cur);
         }
-        return sum;
+        
+        cur=0;
+        for(int k=mid;k>=i;k--)
+        {
+            cur+= nums[k];
+            left_cross= Math.max(left_cross,cur);
+        }
+        
+        int cross_sum=  left_cross + right_cross; 
+        int left_sum = helper(i,mid,nums);
+        int right_sum = helper(mid+1,j,nums);
+        
+        return Math.max( cross_sum , Math.max(left_sum , right_sum) );        
     }
 }

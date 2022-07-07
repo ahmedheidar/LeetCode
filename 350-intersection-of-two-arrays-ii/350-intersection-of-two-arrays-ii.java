@@ -1,6 +1,6 @@
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
-                HashMap<Integer,Integer> hm = new HashMap<>();
+        HashMap<Integer,Integer> hm = new HashMap<>();
         ArrayList<Integer> res = new ArrayList<>();
         for (int x:nums1) {
             if(hm.containsKey(x)){
@@ -18,7 +18,11 @@ class Solution {
                 }
             }
         }
-        return res.stream().mapToInt(x -> x).toArray();
+        int[] result = new int[res.size()];
+        for (int i=0;i< result.length;i++) {
+            result[i]=res.get(i);
+        }
+        return result;
 
     }
 }

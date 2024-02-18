@@ -3,8 +3,7 @@ class Solution {
         StringBuilder sb = new StringBuilder(s);
         
         for(int i=0; i<s.length();i++){
-            sb.deleteCharAt(indices[i]);
-            sb.insert(indices[i], s.charAt(i));
+            sb.setCharAt(indices[i], s.charAt(i));
         }
         return sb.toString();
     }

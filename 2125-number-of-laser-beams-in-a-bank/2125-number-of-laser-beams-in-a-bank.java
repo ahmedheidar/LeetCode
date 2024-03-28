@@ -1,7 +1,8 @@
 class Solution {
     public int numberOfBeams(String[] bank) {
         List<Integer> rows = new ArrayList();
-        
+        int score = 0;
+        int prev = 0;
         for(String row : bank){
             int c = 0;
             for(char laser: row.toCharArray()){
@@ -9,15 +10,12 @@ class Solution {
                     c++;
             }
             
-            if(c!=0)
-                rows.add(c);
+            if(c==0)
+                continue;
+            score+= c*prev;
+            prev = c;
         }
         
-        int score = 0;
-        
-        for(int i=0; i<rows.size()-1; i++){
-            score += rows.get(i)*rows.get(i+1);
-        }
         
         return score;
     }

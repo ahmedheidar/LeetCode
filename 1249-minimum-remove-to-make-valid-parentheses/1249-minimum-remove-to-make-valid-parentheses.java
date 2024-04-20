@@ -2,6 +2,7 @@ class Solution {
     public String minRemoveToMakeValid(String s) {
         Stack<Integer> stack = new Stack<>();
         Set<Integer> set = new HashSet<>();
+        char[] arr = s.toCharArray();
         
         for(int i=0; i<s.length(); i++){
             char c = s.charAt(i);
@@ -9,20 +10,20 @@ class Solution {
                 stack.push(i);
             else if(c==')'){
                 if(stack.isEmpty())
-                    set.add(i);
+                    arr[i]='*';
                 else
                     stack.pop();
             }
         }
         
         while(!stack.isEmpty())
-            set.add(stack.pop());
+            arr[stack.pop()] = '*';
         
         StringBuilder sb = new StringBuilder();
         
-        for(int i=0; i<s.length(); i++){
-            if(!set.contains(i))
-                sb.append(s.charAt(i));
+        for(int i=0; i<arr.length; i++){
+            if(arr[i]!='*')
+                sb.append(arr[i]);
         }
         
         return sb.toString();

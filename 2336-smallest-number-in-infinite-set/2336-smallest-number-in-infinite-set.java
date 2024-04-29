@@ -1,10 +1,11 @@
 class SmallestInfiniteSet {
     
     private PriorityQueue<Integer> pq;
-
+    private Set<Integer> pqset;
     private int c;
     public SmallestInfiniteSet() {
         pq  = new PriorityQueue<>(Comparator.naturalOrder());
+        pqset = new HashSet<>();
         c=1;
     }
     
@@ -14,14 +15,16 @@ class SmallestInfiniteSet {
         }else{
             if(c==pq.peek())
                 c++;
+            pqset.remove(pq.peek());
             return pq.poll();
         }
         
     }
     
     public void addBack(int num) {
-        if (!pq.contains(num)) {
+        if (!pqset.contains(num)) {
             pq.add(num);
+            pqset.add(num);
         }
     }
 }
